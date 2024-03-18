@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon site Laravel</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+
+    *{
+    font-family: 'Poppins', sans-serif; /* Utilisation de la police Poppins pour le reste du document */
+       padding: 0;
+       margin: 0;
+    }
+
+        .fa-arrow-right {
+    display: none;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+.dropdown-item:hover .fa-arrow-right {
+    display: inline-block;
+    opacity: 1;
+    transform: translateX(0);
+}
+
+
+        .navbar-brand img {
+            height: 50px; width: 80px; 
+        }
+
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            bottom: 3px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #a854d4;
+            transition: width 0.3s;
+        }
+
+        .nav-link:hover::before {
+            width: 100%;
+        }
+
+        .dropdown-menu.above {
+            position: absolute;
+            top: 100%; 
+            left: 0;
+            width: 100%;
+            display: none; 
+            max-width: 100vw; 
+            z-index: 999; 
+        }
+
+        .dropdown-item {
+            width: 100%;
+        }
+
+        .btncard:hover {
+    background-color: rgb(73, 33, 194);
+    color: white !important;
+}
+
+        
+
+        
+        .nav-item.dropdown:hover .dropdown-menu.above {
+            display: block; /* Afficher le menu au survol */
+        }
+
+        .custom-select {
+    display: inline-block;
+    position: relative;
+    font-size: 16px;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.custom-select select {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    appearance: none;
+    width: 100%; /* Permet d'occuper toute la largeur */
+}
+
+.custom-select select:focus {
+    border-color: #007bff;
+}
+
+.custom-select select::-ms-expand {
+    display: none;
+}
+
+.custom-select select option {
+    display: inline-flex; /* Afficher les options en ligne */
+    flex: 0 0 auto; /* Empêcher le rétrécissement des options */
+    align-items: center; /* Centrer le contenu vertical */
+    padding: 10px;
+    white-space: nowrap;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-align: center;
+    min-width: 100px; /* Largeur minimale pour chaque option */
+}
+
+.custom-select select option:checked {
+    background-color: #007bff;
+    color: white;
+}
+
+.custom-select select option:hover {
+    background-color: #ccc;
+}
+
+
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg   navbar-light bg-light  fixed-top shadow-sm h-lg-25" style="top: -5;" >
+        <div class="container">
+            <a class="navbar-brand h-70 w-70" href="#">
+                <img src="{{ asset('images/logo/logopic.png') }}" class="d-inline-block   align-top" alt="Logo" style="width: 120px; hieght:70px;">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Acheter
+                        </a>
+                        <ul class="dropdown-menu above position-absolute  " aria-labelledby="navbarDropdown" style="width: 999px;  margin-right:50px;">
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p class="mx-3 text-muted">Annonces</p>
+                                    <ul class="list-unstyled mx-3">
+                                        <li><a class="dropdown-item fw-bold" href="#">Toutes les annonces <i class="fa-solid fa-arrow-right"></i></a></li>
+                                        <li><a class="dropdown-item fw-bold" href="#">Immobilier Neuf <i class="fa-solid fa-arrow-right"></i></a></li>
+                                        <li><a class="dropdown-item fw-bold" href="#">Investir dans un studio <i class="fa-solid fa-arrow-right"></i></a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="mx-3 text-muted">Ressources</p>
+                                    <ul class="list-unstyled mx-3">
+                                        <li><a class="dropdown-item fw-bold" href="#">Le guide de l'acheteur au Maroc <i class="fa-solid fa-arrow-right"></i></a></li>
+                                        <li><a class="dropdown-item fw-bold" href="#">Demander une expertise agréée <i class="fa-solid fa-arrow-right"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            
+                        </ul>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Vendre
+                        </a>
+                        <ul class="dropdown-menu above position-absolute  " aria-labelledby="navbarDropdown" style="width: 999px;  margin-right:50px;">
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p class="mx-3 text-muted">Mes options</p>
+                                    <ul class="list-unstyled mx-3">
+                                        <li><a class="dropdown-item fw-bold" href="#">Vendre rapidement avec agency <i class="fa-solid fa-arrow-right"></i></a></li>
+                                        <li><a class="dropdown-item fw-bold" href="#">Vendre tout seul <i class="fa-solid fa-arrow-right"></i></a></li>
+                                        <li><a class="dropdown-item fw-bold" href="#">Trouver un agent <i class="fa-solid fa-arrow-right"></i></a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="mx-3 text-muted">Ressources</p>
+                                    <ul class="list-unstyled mx-3">
+                                        <li><a class="dropdown-item fw-bold" href="#">Combien coûte ma maison ? <i class="fa-solid fa-arrow-right"></i></a></li>
+                                        <li><a class="dropdown-item fw-bold" href="#">Le guide du crédit <i class="fa-solid fa-arrow-right"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            
+                        </ul>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Crédit immobilier</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Prix immobilier</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Louer</a>
+                    </li>
+                    
+                </ul>
+                <div class="navbar-nav d-flex ">
+                    <li class="nav-item me-3 mb-3 mb-md-0">
+                        <button class="btn text-white" style="background-color:#8b44ca;">Publier une annonce</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn btn-outline-dark">Connexion</button>
+                    </li>
+                </div>
+                
+            </div>
+        </div>
+    </nav>
+
+    <div class=" " style="margin-top: 100px;  "> 
+        <section class="primarySection overflow-x-hidden" style="background-image: linear-gradient(to bottom, rgba(255,255,255,0.9), rgba(215, 186, 240, 0.783));">
+            <div class="row flex-wrap-reverse">
+                <div class="col-md-6   mb-4" style="background-color: rgba(255, 255, 255, 0);">
+                    <h1 class="fw-bold px-4">Cherchez plus simplement votre nouvel bien immobilier</h1>
+                    <form class="px-4">
+                        <div class="mb-3">
+                            <label for="propertyType" class="form-label fw-semibold">Type de bien</label>
+                            <select id="propertyType" class="form-select">
+                                <option value="buy">À vendre</option>
+                                <option value="rent">À louer</option>
+                                <option value="mortgage">Hypothèque</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="location" class="form-label fw-semibold">Localisation</label>
+                            <input type="text" class="form-control" id="location" placeholder="Entrez la localisation">
+                        </div>
+                        <div class="mb-3">
+                            <label for="propertyCategory" class="form-label fw-semibold">Catégorie de bien immobilier</label>
+                            <select id="propertyCategory" class="form-select">
+                                <option value="house">Maison</option>
+                                <option value="villa">Villa</option>
+                                <option value="apartment">Appartement</option>
+                                <option value="commerce">Commerce</option>
+                                <option value="room">Chambre</option>
+                            </select>
+                        </div>
+                        <div class="row g-3">
+                            <div class="col">
+                                <label for="minBeds" class="form-label fw-semibold">chambres</label>
+                                <input type="number" class="form-control" id="minBeds" placeholder="Nombre de chambres minimum">
+                            </div>
+                            <div class="col">
+                                <label for="minBaths" class="form-label fw-semibold">salles bain</label>
+                                <input type="number" class="form-control" id="minBaths" placeholder="Nombre de salles de bain minimum">
+                            </div>
+                            <div class="col">
+                                <label for="minPrice" class="form-label fw-semibold">Prix min</label>
+                                <input type="number" class="form-control" id="minPrice" placeholder="Prix minimum">
+                            </div>
+                        </div>
+                        <div class="row g-3">
+                            <div class="col">
+                                <label for="maxPrice" class="form-label fw-semibold">Prix max</label>
+                                <input type="number" class="form-control" id="maxPrice" placeholder="Prix maximum">
+                            </div>
+                            <div class="col">
+                                <label for="minArea" class="form-label fw-semibold">Surface min</label>
+                                <input type="number" class="form-control" id="minArea" placeholder="Surface minimum">
+                            </div>
+                            <div class="col">
+                                <label for="maxArea" class="form-label fw-semibold">Surface max</label>
+                                <input type="number" class="form-control" id="maxArea" placeholder="Surface maximum">
+                            </div>
+                            <button type="submit" class="btn text-white mt-3" style="background-color: rgb(92, 57, 197);">Rechercher</button>
+        
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-6 d-flex justify-content-center">
+                    <img src="{{ asset('images/logo/img.webp') }}" class="img-fluid" alt="Thumbnail">
+                </div>
+            </div>
+        </section>
+        
+        <section class="secondSection overflow-x-hidden" style="background-image: linear-gradient(to bottom, rgba(215, 186, 240, 0.804), rgba(255,255,255,0.9));">
+            <div class="row">
+                <div class="col-md-4 mb-4 ">
+                    <div class="card h-100 border-0" style="background-color: rgba(240, 248, 255, 0);">
+                        <img src="{{ asset('images/logo/For sale-amico.svg') }}" class="card-img-top" alt="Image 1">
+                        <div class="card-body h-100 mx-4 d-flex flex-column align-items-center">
+                            <h5 class="card-title fw-bold mb-4">Vendez votre bien plus simplement</h5>
+                            <p class="card-text">Confiez-nous la vente de votre bien immobilier et profitez d'une expérience sans souci. Notre équipe experte s'occupe de tout, de la mise en valeur de votre propriété à la conclusion de la vente, pour des résultats rapides et probants.</p>
+                            <div class="mt-auto">
+                            <a href="#" class="btn btn-outline btncard " style=" color: rgb(73, 33, 194); border-color: rgb(73, 33, 194);" >Découvrir nos services</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card border-0 h-100" style="background-color: rgba(240, 248, 255, 0);">
+                        <img src="{{ asset('images/logo/House searching-pana.svg') }}" class="card-img-top" alt="Image 2">
+                        <div class="card-body h-100 mx-4 d-flex flex-column align-items-center">
+                            <h5 class="card-title fw-bold mb-4">Trouvez votre bien idéal</h5>
+                            <p class="card-text">Utilisez notre platforme de recherche avancé pour trouver la maison, la villa, l'appartement ou le commerce parfaitement adapté à vos besoins</p>
+                            <div class="mt-auto">
+                            <a href="#" class="btn btn-outline btncard " style=" color: rgb(73, 33, 194); border-color: rgb(73, 33, 194);" >Parcourir nos annonces</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4 ">
+                    <div class="card border-0 h-100" style="background-color: rgba(240, 248, 255, 0);">
+                        <img src="{{ asset('images/logo/Realtor-amico.svg') }}" class="card-img-top" alt="Image 3">
+                        <div class="card-body h-100 mx-4 d-flex flex-column align-items-center">
+                            <h5 class="card-title fw-bold mb-4">Titre 3</h5>
+                            <p class="card-text">Description 3</p>
+                            <div class="mt-auto">
+                            <a href="#" class="btn btn-outline btncard " style=" color: rgb(73, 33, 194); border-color: rgb(73, 33, 194);" >Parcourir nos annonces</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
